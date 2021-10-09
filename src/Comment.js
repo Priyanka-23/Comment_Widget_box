@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react";
-// import { ChildComment } from "./ChildComment";
 import "./styles.css";
 import Like from "./Like";
-// import ReplyComment from "./ReplyComment";
 import RootComponent from "./RootComponent";
 
-const getCommentsFromStorage = () => {
-  const storedComment = localStorage.getItem("comments");
-  if (storedComment) return JSON.parse(localStorage.getItem("comments"));
-  else return [];
-};
+// const getCommentsFromStorage = ()=>{
+//   const storedComment=localStorage.getItem('comment');
+//   if(storedComment) return JSON.parse(localStorage.getItem('comment'));
+//   else return [];
+// ) };
 const Comment = () => {
   const [text, setText] = useState("");
-  const [comment, setComment] = useState(getCommentsFromStorage);
+  const [comment, setComment] = useState([]);
   const [time, setTime] = useState(new Date().getTime());
   const [reply, setReply] = useState([{ parentId: null, value: "" }]);
   const [data, setData] = useState([
@@ -72,12 +70,12 @@ const Comment = () => {
           if (val.id === id) {
             return { ...val, replyValue: reply };
           }
+
           return val;
         })
       );
     }
   };
-  console.log("Like", isLike);
   const addReply = (id) => {
     setData(
       data.map((val) => {
@@ -89,9 +87,9 @@ const Comment = () => {
     );
   };
 
-  useEffect(() => {
-    localStorage.setItem("comments", JSON.stringify(comment));
-  }, [comment, isLike]);
+  // useEffect(() => {
+  //   // localStorage.setItem("comments", JSON.stringify(comment));
+  // }, [comment]);
 
   useEffect(() => {
     setInterval(function () {
@@ -124,13 +122,13 @@ const Comment = () => {
                   <span onClick={() => deleteComment(val.id)}>Delete</span>
                   <span>
                     {timer < 1 ? (
-                      <p>sec ago</p>
+                      <span>sec ago</span>
                     ) : timer > 0 && timer <= 59 ? (
-                      <p>{`${timer}m ago`}</p>
+                      <span>{`${timer}m ago`}</span>
                     ) : timer > 59 && timer <= 1439 ? (
-                      <p>{`${Math.trunc(timer / 60)}h ago`}</p>
+                      <span>{`${Math.trunc(timer / 60)}h ago`}</span>
                     ) : (
-                      <p>{`${Math.trunc(timer / 1440)}d ago`}</p>
+                      <span>{`${Math.trunc(timer / 1440)}d ago`}</span>
                     )}
                   </span>
                 </div>
@@ -155,25 +153,20 @@ const Comment = () => {
                     <div className="replyBox">
                       <p className="comment">{v.replyValue}</p>
                       <div className="comment_box">
-                        <Like
-                          val={val}
-                          addLike={addLike}
-                          isLike={isLike}
-                          time={time}
-                        />
-                        <span onClick={() => addReply(val.id)}>Reply</span>
+                        <span>Like</span>
+                        <span onClick={() => addReplies(val.id)}>Reply</span>
                         <span onClick={() => deleteComment(val.id)}>
                           Delete
                         </span>
                         <span>
                           {timer < 1 ? (
-                            <p>sec ago</p>
+                            <span>sec ago</span>
                           ) : timer > 0 && timer <= 59 ? (
-                            <p>{`${timer} m`}</p>
+                            <span>{`${timer}m ago`}</span>
                           ) : timer > 59 && timer <= 1439 ? (
-                            <p>{`${Math.trunc(timer / 60)} h`}</p>
+                            <span>{`${Math.trunc(timer / 60)}h ago`}</span>
                           ) : (
-                            <p>{`${Math.trunc(timer / 1440)} d`}</p>
+                            <span>{`${Math.trunc(timer / 1440)}d ago`}</span>
                           )}
                         </span>
                       </div>

@@ -8,10 +8,9 @@ p {
 .replyBox {
   margin-left: 40px;
 }
-/* span .time {
-  color: black;
-} */
-
+.replyText {
+  margin-left: 40px;
+}
 span {
   padding: 5px;
   cursor: pointer;
@@ -19,9 +18,10 @@ span {
 }
 .comment {
   border: 2px solid rgb(196, 193, 193);
+  padding: 5px;
   border-radius: 10px;
-  width: 100%;
-  margin: 5px;
+  min-width: 90%;
+  margin-top: 20px;
   text-align: left;
 }
 .commentBox {
@@ -37,5 +37,5 @@ span {
 }
 .comment_style {
   margin: 40px;
-  border: 2px solid rgb(105, 104, 104, o.7);
+  border: 20px solid rgb(105, 104, 104, o.7);
 }
