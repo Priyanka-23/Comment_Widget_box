@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import "./styles.css";
-import Like from "./Like";
 import RootComponent from "./RootComponent";
 
 // const getCommentsFromStorage = ()=>{
@@ -107,9 +106,12 @@ const Comment = () => {
           return (
             <>
               <div className="commentBox">
-                <span className="comment">{val.input}</span>
+                <p className="comment">{val.input}</p>
                 <div className="comment_button">
-                  <span onClick={() => addLike(val.id)}>
+                  <span
+                    style={{ color: "blue" }}
+                    onClick={() => addLike(val.id)}
+                  >
                     {isLike.map((value) => {
                       if (val.id === value.id && value.like === true) {
                         return "Liked";
@@ -119,8 +121,13 @@ const Comment = () => {
                     })}
                   </span>
                   <span onClick={() => addReply(val.id)}>Reply</span>
-                  <span onClick={() => deleteComment(val.id)}>Delete</span>
-                  <span>
+                  <span
+                    style={{ color: "#A52A2A" }}
+                    onClick={() => deleteComment(val.id)}
+                  >
+                    Delete
+                  </span>
+                  <span style={{ color: "#696969" }}>
                     {timer < 1 ? (
                       <span>sec ago</span>
                     ) : timer > 0 && timer <= 59 ? (
@@ -154,10 +161,8 @@ const Comment = () => {
                       <p className="comment">{v.replyValue}</p>
                       <div className="comment_box">
                         <span>Like</span>
-                        <span onClick={() => addReplies(val.id)}>Reply</span>
-                        <span onClick={() => deleteComment(val.id)}>
-                          Delete
-                        </span>
+                        <span>Reply</span>
+                        <span>Delete</span>
                         <span>
                           {timer < 1 ? (
                             <span>sec ago</span>
